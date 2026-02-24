@@ -2,18 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jade Chen | Portfolio</title>
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Apply saved theme from localStorage -->
   <script>
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    }
+    // Force class strategy so html.dark controls all dark: styles
+    tailwind.config = { darkMode: 'class' };
+  </script>
+
+  <!-- Theme bootstrap: default LIGHT unless user explicitly chose dark -->
+  <script>
+    (function () {
+      const saved = localStorage.getItem('theme');   // "dark" | "light" | null
+      const isDark = saved === 'dark';
+      document.documentElement.classList.toggle('dark', isDark);
+      if (!saved) localStorage.setItem('theme','light');
+    })();
   </script>
 
   <!-- AOS Animation -->
@@ -27,31 +33,19 @@
   <meta name="description" content="Portfolio website of Jade Chen – Data Scientist and Economics Researcher." />
 
   <style>
-    @keyframes fade-in {
-      0% { opacity: 0; transform: translateY(-10px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-in {
-      animation: fade-in 1s ease-out forwards;
-    }
-    .animate-hover {
-      transition: transform 0.3s ease;
-    }
-    .animate-hover:hover {
-      transform: scale(1.05);
-    }
-    .nav-link {
-      opacity: 0;
-      animation: fade-in 0.8s ease-out forwards;
-    }
-    /* Ensure left-to-right order by setting explicit delay values */
+    @keyframes fade-in { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
+    .animate-fade-in { animation: fade-in 1s ease-out forwards; }
+    .animate-hover { transition: transform 0.3s ease; }
+    .animate-hover:hover { transform: scale(1.05); }
+    .nav-link { opacity: 0; animation: fade-in 0.8s ease-out forwards; }
     #nav-about { animation-delay: 0.2s; }
     #nav-projects { animation-delay: 0.4s; }
     #nav-skills { animation-delay: 0.6s; }
     #nav-contact { animation-delay: 0.8s; }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans transition-colors duration-300" id="body">
+
+<body class="bg-gray-50 text-gray-800 dark:bg-neutral-900 dark:text-gray-300 font-sans transition-colors duration-300" id="body">
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5444BNPMB0"></script>
   <script>
@@ -62,231 +56,181 @@
   </script>
 
   <!-- Navigation -->
-  <header class="bg-stone-200 fixed top-0 w-full z-40 shadow" id="header">
+  <header class="bg-stone-200 dark:bg-neutral-800 fixed top-0 w-full z-40 shadow" id="header">
     <div class="max-w-4xl mx-auto p-4 flex justify-between items-center">
-      <!-- Site title -->
       <div>
-        <h1 class="text-xl font-bold text-black animate-fade-in" id="site-title">Jade Chen</h1>
-        <p class="text-xs text-black" id="site-subtitle">Data Science & Economics</p>
+        <h1 class="text-xl font-bold text-black dark:text-gray-300 animate-fade-in" id="site-title">Jade Chen</h1>
+        <p class="text-xs text-black dark:text-gray-300" id="site-subtitle">Data Science & Economics</p>
       </div>
 
-      <!-- Right section: nav (desktop) + toggle + menu button -->
       <div class="flex items-center space-x-2">
-        <!-- Lightbulb toggle (always visible) -->
-        <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode">
-          💡
-        </button>
+        <!-- Lightbulb toggle -->
+        <button id="theme-toggle"
+                class="text-yellow-500 hover:text-yellow-300 text-xl relative z-50 cursor-pointer"
+                aria-label="Toggle Dark Mode"
+                aria-pressed="false">💡</button>
 
         <!-- Mobile hamburger -->
-        <button id="menu-btn" class="text-gray-700 md:hidden focus:outline-none text-2xl">☰</button>
+        <button id="menu-btn" class="text-gray-700 dark:text-gray-300 md:hidden focus:outline-none text-2xl">☰</button>
 
         <!-- Desktop nav -->
         <nav id="nav-menu" class="hidden md:flex items-center space-x-4">
-          <a href="#about" class="nav-link font-semibold hover:underline" id="nav-about">About</a>
-          <a href="#projects" class="nav-link font-semibold hover:underline" id="nav-projects">Projects</a>
-          <a href="#skills" class="nav-link font-semibold hover:underline" id="nav-skills">Skills</a>
-          <a href="#contact" class="nav-link font-semibold hover:underline" id="nav-contact">Contact</a>
+          <a href="#about"    class="nav-link font-semibold hover:underline text-gray-700 dark:text-gray-300" id="nav-about">About</a>
+          <a href="#projects" class="nav-link font-semibold hover:underline text-gray-700 dark:text-gray-300" id="nav-projects">Projects</a>
+          <a href="#skills"   class="nav-link font-semibold hover:underline text-gray-700 dark:text-gray-300" id="nav-skills">Skills</a>
+          <a href="#contact"  class="nav-link font-semibold hover:underline text-gray-700 dark:text-gray-300" id="nav-contact">Contact</a>
         </nav>
       </div>
     </div>
 
     <!-- Mobile menu -->
-  <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
-    <a href="#about" id="mobile-about" class="block text-gray-700 font-semibold hover:underline">About</a>
-    <a href="#projects" id="mobile-projects" class="block text-gray-700 font-semibold hover:underline">Projects</a>
-    <a href="#skills" id="mobile-skills" class="block text-gray-700 font-semibold hover:underline">Skills</a>
-    <a href="#contact" id="mobile-contact" class="block text-gray-700 font-semibold hover:underline">Contact</a>
-  </div>
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+      <a href="#about"    id="mobile-about"    class="block text-gray-700 dark:text-gray-300 font-semibold hover:underline">About</a>
+      <a href="#projects" id="mobile-projects" class="block text-gray-700 dark:text-gray-300 font-semibold hover:underline">Projects</a>
+      <a href="#skills"   id="mobile-skills"   class="block text-gray-700 dark:text-gray-300 font-semibold hover:underline">Skills</a>
+      <a href="#contact"  id="mobile-contact"  class="block text-gray-700 dark:text-gray-300 font-semibold hover:underline">Contact</a>
+    </div>
   </header>
 
   <!-- Content -->
-    <main class="pt-32 px-4 max-w-4xl mx-auto space-y-12">
-      <section id="about" data-aos="fade-up">
-        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-          <h2 class="text-2xl font-bold">About Me</h2>
-          <a href="resume.html" target="_blank" rel="noopener noreferrer"
-            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover text-sm sm:text-base">
-            View Resume
+  <main class="pt-32 px-4 max-w-4xl mx-auto space-y-12">
+    <section id="about" data-aos="fade-up">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <h2 class="text-2xl font-bold">About Me</h2>
+        <a href="resume.html" target="_blank" rel="noopener noreferrer"
+           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover text-sm sm:text-base">
+          View Resume
+        </a>
+      </div>
+
+      <div class="flex flex-col sm:flex-row sm:items-start sm:gap-6">
+        <div class="flex flex-col items-center sm:items-start">
+          <a href="assets/images/profile-pic.jpg" id="profile-link" class="block w-32 h-32 shrink-0 transition-transform hover:scale-105 mb-3 sm:mb-4">
+            <img src="assets/images/profile-pic.jpg" alt="Profile picture of Jade Chen"
+                 class="w-full h-full object-cover rounded-full shadow border border-gray-300 dark:border-gray-600" />
           </a>
         </div>
 
-        <div class="flex flex-col sm:flex-row sm:items-start sm:gap-6">
-          <div class="flex flex-col items-center sm:items-start">
-            <a href="assets/images/profile-pic.jpg" class="block w-32 h-32 shrink-0 transition-transform hover:scale-105 mb-3 sm:mb-4">
-              <img src="assets/images/profile-pic.jpg" alt="Profile picture of Jade Chen" class="w-full h-full object-cover rounded-full shadow border border-gray-300" />
-            </a>
-          </div>
-
-          <div class="mt-4 sm:mt-0 sm:ml-4">
-            <p class="mb-4">
-              I’m Jade Chen, a data analyst and economics researcher based in Arlington, VA. With a B.A. in Economics from UC Berkeley and additional training at the London School of Economics, I specialize in data science techniques to uncover insights in public policy, urban development, and social impact. I’m experienced in Python, R, SQL, and libraries like scikit-learn and NLTK to blend statistical modeling with policy relevance. I’ve researched issues related to transportation, conflict dynamics, housing inequity, and pandemic response.
-            </p>
-          </div>
+        <div class="mt-4 sm:mt-0 sm:ml-4">
+          <p class="mb-4">
+            I’m Jade Chen, a data analyst and economics researcher based in Arlington, VA. With a B.A. in Economics from UC Berkeley and additional training at the London School of Economics, I specialize in data science techniques to uncover insights in public policy, urban development, and social impact. I’m experienced in Python, R, SQL, and libraries like scikit-learn and NLTK to blend statistical modeling with policy relevance. I’ve researched issues related to transportation, conflict dynamics, housing inequity, and pandemic response.
+          </p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="projects" data-aos="fade-up">
-        <h2 class="text-2xl font-bold mb-4">Projects</h2>
-        <div class="space-y-8">
-          <div>
-            <h3 class="text-xl font-semibold"><a href="projects\dc-bikeshare\plots-and-paper\dc-bikeshare-paper.html" class="text-blue-600 hover:underline">🚲 EDA & Visualization – Bikeshare Usage Analysis </a></h3>
-            <p>Explored patterns in casual vs. registered riders in Washington D.C. using KDE, LOWESS, and regression visualizations. Found strong weekend-seasonal trends among casual users and workday commuting behavior in registered users.</p>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold"><a href="projects/conflict-nlp.html" class="text-blue-600 hover:underline">🌏 NLP Classification – Political Reservations on Subnational Conflict</a></h3>
-            <p>Used Python (NLTK) to classify 195k+ conflict records by sentiment and framing. Labeled data for supervised ML to study how political reservations affect conflict narratives in India.</p>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold"><a href="projects/cook-county.html" class="text-blue-600 hover:underline">🏘️ Predictive Modeling – Property Valuation & Bias Detection</a></h3>
-            <p>Built regression models to predict property values and detect tax bias patterns in Cook County, Illinois. Identified consistent overestimation in low-value homes, highlighting regressive valuation trends.</p>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold"><a href="projects/smart-cities.html" class="text-blue-600 hover:underline">🦠 Econometrics – Smart Cities Pandemic Policy Evaluation</a></h3>
-            <p>Analyzed India's Smart Cities Mission using difference-in-difference methods to assess COVID-19 impacts across 200 cities. Combined statistical rigor with cost-benefit analysis and policy insights.</p>
-          </div>
+    <section id="projects" data-aos="fade-up">
+      <h2 class="text-2xl font-bold mb-4">Projects</h2>
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold">
+            <a href="projects/dc-bikeshare/plots-and-paper/dc-bikeshare-paper.html" class="text-blue-600 hover:underline">🚲 EDA & Visualization – Bikeshare Usage Analysis</a>
+          </h3>
+          <p>Explored patterns in casual vs. registered riders in Washington D.C. using KDE, LOWESS, and regression visualizations. Found strong weekend-seasonal trends among casual users and workday commuting behavior in registered users.</p>
         </div>
-      </section>
-
-      <section id="skills" data-aos="fade-up">
-        <h2 class="text-2xl font-bold mb-4">Skills</h2>
-        <ul class="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <li>Python ▓▓▓▓▓▓▓▓░░ 90%</li>
-          <li>R ▓▓▓▓▓▓▓░░░ 80%</li>
-          <li>SQL ▓▓▓▓▓▓░░░░ 70%</li>
-          <li>Data Cleaning ▓▓▓▓▓▓▓▓▓░ 95%</li>
-          <li>EDA ▓▓▓▓▓▓▓▓▓░ 95%</li>
-          <li>NLP ▓▓▓▓▓▓▓░░░ 80%</li>
-        </ul>
-      </section>
-
-      <section id="contact" data-aos="fade-up">
-        <h2 class="text-2xl font-bold mb-4">Contact</h2>
-        <div class="space-y-2">
-          <a href="mailto:kunyuliu@berkeley.edu" class="text-blue-600 hover:underline">Email</a>
-          <a href="https://www.linkedin.com/in/jad3ch3n" class="text-blue-600 hover:underline">LinkedIn</a>
-          <a href="https://github.com/jad3ch3n" class="text-blue-600 hover:underline">GitHub</a>
+        <div>
+          <h3 class="text-xl font-semibold">
+            <a href="projects/conflict-nlp.html" class="text-blue-600 hover:underline">🌏 NLP Classification – Political Reservations on Subnational Conflict</a>
+          </h3>
+          <p>Used Python (NLTK) to classify 195k+ conflict records by sentiment and framing. Labeled data for supervised ML to study how political reservations affect conflict narratives in India.</p>
         </div>
-      </section>
-    </div>
+        <div>
+          <h3 class="text-xl font-semibold">
+            <a href="projects/cook-county.html" class="text-blue-600 hover:underline">🏘️ Predictive Modeling – Property Valuation & Bias Detection</a>
+          </h3>
+          <p>Built regression models to predict property values and detect tax bias patterns in Cook County, Illinois. Identified consistent overestimation in low-value homes, highlighting regressive valuation trends.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold">
+            <a href="projects/smart-cities.html" class="text-blue-600 hover:underline">🦠 Econometrics – Smart Cities Pandemic Policy Evaluation</a>
+          </h3>
+          <p>Analyzed India's Smart Cities Mission using difference-in-difference methods to assess COVID-19 impacts across 200 cities. Combined statistical rigor with cost-benefit analysis and policy insights.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" data-aos="fade-up">
+      <h2 class="text-2xl font-bold mb-4">Skills</h2>
+      <ul class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <li>Python ▓▓▓▓▓▓▓▓░░ 90%</li>
+        <li>R ▓▓▓▓▓▓▓░░░ 80%</li>
+        <li>SQL ▓▓▓▓▓▓░░░░ 70%</li>
+        <li>Data Cleaning ▓▓▓▓▓▓▓▓▓░ 95%</li>
+        <li>EDA ▓▓▓▓▓▓▓▓▓░ 95%</li>
+        <li>NLP ▓▓▓▓▓▓▓░░░ 80%</li>
+      </ul>
+    </section>
+
+    <section id="contact" data-aos="fade-up">
+      <h2 class="text-2xl font-bold mb-4">Contact</h2>
+      <div class="space-y-2">
+        <a href="mailto:kunyuliu@berkeley.edu" class="text-blue-600 hover:underline">Email</a>
+        <a href="https://www.linkedin.com/in/jad3ch3n" class="text-blue-600 hover:underline">LinkedIn</a>
+        <a href="https://github.com/jad3ch3n" class="text-blue-600 hover:underline">GitHub</a>
+      </div>
+    </section>
   </main>
 
   <!-- Modal for enlarged profile pic -->
   <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50 p-4">
-    <div class="relative fade-in-fast max-w-full w-[32rem] sm:w-[28rem] md:w-[32rem]">
+    <div class="relative max-w-full w-[32rem] sm:w-[28rem] md:w-[32rem]">
       <button id="modal-close" class="absolute top-0 right-0 m-2 text-white text-2xl bg-black bg-opacity-50 rounded-full w-8 h-8 flex items-center justify-center hover:bg-opacity-75">&times;</button>
-      <img src="assets/images/profile-pic.jpg" alt="Enlarged profile picture" class="w-full aspect-square object-cover rounded-full border-4 border-white dark:border-gray-700 shadow-xl">
+      <img src="assets/images/profile-pic.jpg" alt="Enlarged profile picture"
+           class="w-full aspect-square object-cover rounded-full border-4 border-white dark:border-gray-700 shadow-xl">
     </div>
   </div>
 
-    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="fixed bottom-4 right-4 bg-gray-300 text-black px-3 py-2 rounded shadow hover:bg-gray-400">Top ↑</button>
+  <!-- Back to Top -->
+  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});"
+          class="fixed bottom-4 right-4 bg-gray-300 dark:bg-neutral-700 text-black dark:text-gray-200 px-3 py-2 rounded shadow hover:bg-gray-400 dark:hover:bg-neutral-600">
+    Top ↑
+  </button>
 
-    <footer class="bg-stone-200 text-center p-4 mt-12">
-      <p>&copy; 2025 Jade Chen</p>
-    </footer>
+  <footer class="bg-stone-200 dark:bg-neutral-800 text-center p-4 mt-12 border-t border-gray-200 dark:border-neutral-800">
+    <p class="text-gray-700 dark:text-gray-300">&copy; 2025 Jade Chen</p>
+  </footer>
 
+  <!-- AOS + Site Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
 
+    // Mobile menu
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     menuBtn?.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
     });
 
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.getElementById('body');
-    const nav = document.querySelector('header');
-    const footer = document.querySelector('footer');
-    const title = document.getElementById('site-title');
-    const subtitle = document.getElementById('site-subtitle');
-    const navLinks = [
-      document.getElementById('nav-about'),
-      document.getElementById('nav-projects'),
-      document.getElementById('nav-skills'),
-      document.getElementById('nav-contact')
-    ];
+    // THEME: single source of truth (html.dark + localStorage.theme)
+    (function () {
+      const btn = document.getElementById('theme-toggle');
+      if (!btn) return;
 
-    function enableDarkMode() {
-      localStorage.setItem('theme', 'dark');
-      body.classList.remove('bg-gray-50', 'text-gray-800');
-      body.classList.add('bg-neutral-900', 'text-gray-300');
-      nav.classList.remove('bg-stone-200');
-      nav.classList.add('bg-neutral-800');
-      footer.classList.remove('bg-stone-200');
-      footer.classList.add('bg-neutral-800');
-      title.classList.remove('text-black');
-      title.classList.add('text-gray-300');
-      subtitle.classList.remove('text-black');
-      subtitle.classList.add('text-gray-300');
-
-      // Desktop nav links
-      navLinks.forEach(link => {
-        link.classList.remove('text-gray-700');
-        link.classList.add('text-gray-300');
-      });
-
-      // Mobile nav links
-      ['mobile-about', 'mobile-projects', 'mobile-skills', 'mobile-contact'].forEach(id => {
-        const link = document.getElementById(id);
-        link?.classList.remove('text-gray-700');
-        link?.classList.add('text-gray-300');
-      });
-
-      themeToggle.textContent = '💡';
-    }
-
-    function disableDarkMode() {
-      localStorage.setItem('theme', 'light');
-      body.classList.add('bg-gray-50', 'text-gray-800');
-      body.classList.remove('bg-neutral-900', 'text-gray-300');
-      nav.classList.add('bg-stone-200');
-      nav.classList.remove('bg-neutral-800');
-      footer.classList.add('bg-stone-200');
-      footer.classList.remove('bg-neutral-800');
-      title.classList.add('text-black');
-      title.classList.remove('text-gray-300');
-      subtitle.classList.add('text-black');
-      subtitle.classList.remove('text-gray-300');
-
-      // Desktop nav links
-      navLinks.forEach(link => {
-        link.classList.add('text-gray-700');
-        link.classList.remove('text-gray-300');
-      });
-
-      // Mobile nav links
-      ['mobile-about', 'mobile-projects', 'mobile-skills', 'mobile-contact'].forEach(id => {
-        const link = document.getElementById(id);
-        link?.classList.add('text-gray-700');
-        link?.classList.remove('text-gray-300');
-      });
-
-      themeToggle.textContent = '💡';
-    }
-
-    // Initialize theme on page load
-    if (localStorage.getItem('theme') === 'dark') {
-      enableDarkMode();
-    } else {
-      disableDarkMode();
-    }
-
-    themeToggle?.addEventListener('click', () => {
-      const isDark = body.classList.contains('bg-neutral-900');
-      if (isDark) {
-        disableDarkMode();
-      } else {
-        enableDarkMode();
+      function applyTheme(mode) {
+        const isDark = mode === 'dark';
+        document.documentElement.classList.toggle('dark', isDark);
+        localStorage.setItem('theme', mode);
+        btn.setAttribute('aria-pressed', String(isDark));
       }
-    });
+
+      // Initialize from storage (already applied in <head>, but keep aria in sync)
+      const saved = localStorage.getItem('theme'); // "dark" | "light"
+      applyTheme(saved === 'dark' ? 'dark' : 'light');
+
+      // Toggle on click
+      btn.addEventListener('click', () => {
+        const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+        applyTheme(next);
+      });
+    })();
 
     // Profile modal logic
     const modal = document.getElementById('modal');
     const modalClose = document.getElementById('modal-close');
-    const profilePic = document.querySelector('img[src="assets/images/profile-pic.jpg"]');
+    const profileLink = document.getElementById('profile-link');
 
-    profilePic?.addEventListener('click', (e) => {
+    profileLink?.addEventListener('click', (e) => {
       e.preventDefault();
       modal.classList.remove('hidden');
       modal.classList.add('flex');

@@ -1,29 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" class="">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Resume | Jade Chen</title>
-  <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Apply saved theme before page renders -->
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    }
+    // Ensure Tailwind uses class strategy for dark mode
+    tailwind.config = { darkMode: 'class' };
+  </script>
+
+  <!-- Theme bootstrap: default LIGHT unless user explicitly chose dark -->
+  <script>
+    (function () {
+      const saved = localStorage.getItem('theme');   // "dark" | "light" | null
+      const isDark = saved === 'dark';
+      document.documentElement.classList.toggle('dark', isDark);
+      if (!saved) localStorage.setItem('theme','light'); // initialize once
+    })();
   </script>
 </head>
+
 <body class="bg-gray-50 text-gray-800 dark:bg-neutral-900 dark:text-gray-300 font-sans transition-colors duration-300">
   <div class="max-w-4xl mx-auto p-6">
-    <a href="index.html" class="text-blue-600 hover:underline">← Back to Home</a>
+    <!-- Top bar -->
+    <div class="flex items-center justify-between">
+      <a href="index.html" class="text-blue-600 hover:underline">← Back to Home</a>
+      <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode" aria-pressed="false">💡</button>
+    </div>
+
     <h1 class="text-3xl font-bold mt-4 mb-4">Resume</h1>
+
+    <!-- Embedded Google Drive PDF viewer -->
     <iframe
       src="https://drive.google.com/file/d/17SgTcf8drDNJNIwVsVfs83HcPyU7EkX6/view?usp=sharing"
       class="w-full h-[90vh] border rounded shadow"
       frameborder="0"
       allow="autoplay">
     </iframe>
+
+    <footer class="text-center text-sm text-gray-500 dark:text-gray-400 mt-12 border-t border-gray-200 dark:border-neutral-800 pt-4">
+      <p>&copy; 2025 Jade Chen</p>
+    </footer>
   </div>
+
+  <!-- Toggle logic: flip html.dark + persist (same as index.html) -->
+  <script>
+    (function () {
+      const btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+
+      function applyTheme(mode) {
+        const isDark = mode === 'dark';
+        document.documentElement.classList.toggle('dark', isDark);
+        localStorage.setItem('theme', mode);
+        btn.setAttribute('aria-pressed', String(isDark));
+      }
+
+      // Initialize from storage (keeps aria-pressed in sync)
+      const saved = localStorage.getItem('theme'); // "dark" | "light"
+      applyTheme(saved === 'dark' ? 'dark' : 'light');
+
+      // Toggle on click
+      btn.addEventListener('click', () => {
+        const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+        applyTheme(next);
+      });
+    })();
+  </script>
 </body>
 </html>
