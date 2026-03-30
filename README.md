@@ -25,6 +25,7 @@ The portfolio currently highlights work in:
 - Light and dark theme support
 - Custom domain configuration for `jadechen.site`
 - SEO essentials for a static portfolio: canonical URLs, sitemap, robots, and social metadata
+- Shared client-side site helper for theme persistence and contact-link rendering
 
 ## Tech Stack
 
@@ -84,6 +85,21 @@ Deployment notes:
 - `robots.txt` and `sitemap.xml` are included for search indexing support.
 - The web manifest lives at [`assets/icons/site.webmanifest`](assets/icons/site.webmanifest).
 
+## Theme & Privacy Notes
+
+The site uses a shared helper in `assets/js/site.js` to keep light/dark mode behavior consistent across pages.
+
+Privacy hardening currently includes:
+
+- client-side rendering for homepage contact links to reduce basic email scraping
+- `referrer` and `referrerpolicy` protections on public-facing pages and outbound links
+- explicit `robots.txt` directives that opt major AI-training crawlers out of the site
+- removal of third-party resume embedding in favor of the site-hosted PDF
+
+Important limitation:
+
+- A static site cannot fully prevent scraping or copying. These changes reduce casual harvesting and make intent clear, but they are not a guarantee against determined bots or mirrors.
+
 ## Repository Structure
 
 ```text
@@ -129,7 +145,7 @@ Detailed rename guidance is documented in [`REPO_RENAME_NOTES.md`](REPO_RENAME_N
 - Strengthen homepage storytelling with clearer project outcomes and impact metrics
 - Add a dedicated social preview image for richer link sharing
 - Introduce a stronger content hierarchy for featured projects
-- Add a downloadable resume fallback next to the embedded viewer
+- Add a lightweight build step for linting or HTML validation if the site grows
 - Expand SEO metadata coverage if additional pages are added
 
 ## Maintenance Notes
