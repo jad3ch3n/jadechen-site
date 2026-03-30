@@ -11,16 +11,21 @@
     // Ensure Tailwind uses class strategy for dark mode
     tailwind.config = { darkMode: 'class' };
   </script>
-
-  <!-- Theme bootstrap: default LIGHT unless user explicitly chose dark -->
-  <script>
-    (function () {
-      const saved = localStorage.getItem('theme');   // "dark" | "light" | null
-      const isDark = saved === 'dark';
-      document.documentElement.classList.toggle('dark', isDark);
-      if (!saved) localStorage.setItem('theme','light'); // initialize once
-    })();
-  </script>
+  <script src="assets/js/site.js"></script>
+  <meta name="description" content="Resume and experience overview for Jade Chen, data analyst and economics researcher.">
+  <link rel="canonical" href="https://jadechen.site/resume.html">
+  <meta name="theme-color" content="#f9fafb">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Jade Chen">
+  <meta property="og:title" content="Resume | Jade Chen">
+  <meta property="og:description" content="View Jade Chen's resume, background, and experience in data analytics and economics research.">
+  <meta property="og:url" content="https://jadechen.site/resume.html">
+  <meta property="og:image" content="https://jadechen.site/assets/images/profile-pic.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Resume | Jade Chen">
+  <meta name="twitter:description" content="View Jade Chen's resume, background, and experience in data analytics and economics research.">
+  <meta name="twitter:image" content="https://jadechen.site/assets/images/profile-pic.jpg">
 </head>
 
 <body class="bg-gray-50 text-gray-800 dark:bg-neutral-900 dark:text-gray-300 font-sans transition-colors duration-300">
@@ -31,44 +36,36 @@
       <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode" aria-pressed="false">💡</button>
     </div>
 
-    <h1 class="text-3xl font-bold mt-4 mb-4">Resume</h1>
+    <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+      <h1 class="text-3xl font-bold">Resume</h1>
+      <div class="flex flex-wrap gap-2">
+        <a href="https://drive.google.com/file/d/17SgTcf8drDNJNIwVsVfs83HcPyU7EkX6/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700">
+          Open in Google Drive
+        </a>
+      </div>
+    </div>
 
-    <!-- Embedded Google Drive PDF viewer -->
-    <iframe
-      src="https://drive.google.com/file/d/17SgTcf8drDNJNIwVsVfs83HcPyU7EkX6/preview"
-      class="w-full h-[90vh] border rounded shadow"
-      frameborder="0"
-      allow="autoplay">
-    </iframe>
+    <div class="mt-6 overflow-hidden rounded-xl border border-gray-200 bg-white shadow dark:border-neutral-700 dark:bg-neutral-800">
+      <div class="relative w-full aspect-[8.5/11] min-h-[70vh] sm:min-h-[80vh] lg:min-h-[90vh]">
+        <iframe
+          src="https://drive.google.com/file/d/17SgTcf8drDNJNIwVsVfs83HcPyU7EkX6/preview"
+          class="absolute inset-0 h-full w-full"
+          title="Jade Chen resume preview"
+          frameborder="0"
+          loading="lazy"
+          allow="autoplay">
+        </iframe>
+      </div>
+    </div>
 
     <footer class="text-center text-sm text-gray-500 dark:text-gray-400 mt-12 border-t border-gray-200 dark:border-neutral-800 pt-4">
-      <p>&copy; 2025 Jade Chen</p>
+      <p>&copy; 2026 Jade Chen</p>
     </footer>
   </div>
 
-  <!-- Toggle logic: flip html.dark + persist (same as index.html) -->
   <script>
-    (function () {
-      const btn = document.getElementById('theme-toggle');
-      if (!btn) return;
-
-      function applyTheme(mode) {
-        const isDark = mode === 'dark';
-        document.documentElement.classList.toggle('dark', isDark);
-        localStorage.setItem('theme', mode);
-        btn.setAttribute('aria-pressed', String(isDark));
-      }
-
-      // Initialize from storage (keeps aria-pressed in sync)
-      const saved = localStorage.getItem('theme'); // "dark" | "light"
-      applyTheme(saved === 'dark' ? 'dark' : 'light');
-
-      // Toggle on click
-      btn.addEventListener('click', () => {
-        const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
-        applyTheme(next);
-      });
-    })();
+    JadeSite.initThemeToggle();
+    JadeSite.decorateExternalLinks();
   </script>
 </body>
 </html>

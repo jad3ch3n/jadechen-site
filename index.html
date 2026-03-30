@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jade Chen | Portfolio</title>
+  <title>Jade Chen | Data Analyst Portfolio</title>
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -11,16 +11,7 @@
     // Force class strategy so html.dark controls all dark: styles
     tailwind.config = { darkMode: 'class' };
   </script>
-
-  <!-- Theme bootstrap: default LIGHT unless user explicitly chose dark -->
-  <script>
-    (function () {
-      const saved = localStorage.getItem('theme');   // "dark" | "light" | null
-      const isDark = saved === 'dark';
-      document.documentElement.classList.toggle('dark', isDark);
-      if (!saved) localStorage.setItem('theme','light');
-    })();
-  </script>
+  <script src="assets/js/site.js"></script>
 
   <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -29,8 +20,23 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/site.webmanifest">
 
-  <meta name="description" content="Portfolio website of Jade Chen – Data Scientist and Economics Researcher." />
+  <link rel="canonical" href="https://jadechen.site/">
+  <meta name="theme-color" content="#f9fafb">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jade Chen">
+  <meta property="og:title" content="Jade Chen | Data Analyst Portfolio">
+  <meta property="og:description" content="Explore selected data analytics, econometrics, and policy research projects by Jade Chen.">
+  <meta property="og:url" content="https://jadechen.site/">
+  <meta property="og:image" content="https://jadechen.site/assets/images/profile-pic.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jade Chen | Data Analyst Portfolio">
+  <meta name="twitter:description" content="Explore selected data analytics, econometrics, and policy research projects by Jade Chen.">
+  <meta name="twitter:image" content="https://jadechen.site/assets/images/profile-pic.jpg">
+
+  <meta name="description" content="Portfolio of Jade Chen, a data analyst and economics researcher focused on policy, urban development, and applied machine learning." />
 
   <style>
     @keyframes fade-in { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
@@ -164,9 +170,9 @@
     <section id="contact" data-aos="fade-up">
       <h2 class="text-2xl font-bold mb-4">Contact</h2>
       <div class="space-y-2">
-        <a href="mailto:kunyuliu@berkeley.edu" class="text-blue-600 hover:underline">Email</a>
-        <a href="https://www.linkedin.com/in/jad3ch3n" class="text-blue-600 hover:underline">LinkedIn</a>
-        <a href="https://github.com/jad3ch3n" class="text-blue-600 hover:underline">GitHub</a>
+        <a href="#" data-contact="email" class="text-blue-600 hover:underline">Email</a>
+        <a href="#" data-contact="linkedin" class="text-blue-600 hover:underline">LinkedIn</a>
+        <a href="#" data-contact="github" class="text-blue-600 hover:underline">GitHub</a>
       </div>
     </section>
   </main>
@@ -187,7 +193,7 @@
   </button>
 
   <footer class="bg-stone-200 dark:bg-neutral-800 text-center p-4 mt-12 border-t border-gray-200 dark:border-neutral-800">
-    <p class="text-gray-700 dark:text-gray-300">&copy; 2025 Jade Chen</p>
+    <p class="text-gray-700 dark:text-gray-300">&copy; 2026 Jade Chen</p>
   </footer>
 
   <!-- AOS + Site Scripts -->
@@ -202,28 +208,9 @@
       mobileMenu.classList.toggle('hidden');
     });
 
-    // THEME: single source of truth (html.dark + localStorage.theme)
-    (function () {
-      const btn = document.getElementById('theme-toggle');
-      if (!btn) return;
-
-      function applyTheme(mode) {
-        const isDark = mode === 'dark';
-        document.documentElement.classList.toggle('dark', isDark);
-        localStorage.setItem('theme', mode);
-        btn.setAttribute('aria-pressed', String(isDark));
-      }
-
-      // Initialize from storage (already applied in <head>, but keep aria in sync)
-      const saved = localStorage.getItem('theme'); // "dark" | "light"
-      applyTheme(saved === 'dark' ? 'dark' : 'light');
-
-      // Toggle on click
-      btn.addEventListener('click', () => {
-        const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
-        applyTheme(next);
-      });
-    })();
+    JadeSite.initThemeToggle();
+    JadeSite.initProtectedContacts();
+    JadeSite.decorateExternalLinks();
 
     // Profile modal logic
     const modal = document.getElementById('modal');

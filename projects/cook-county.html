@@ -3,149 +3,151 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🏘️ Property Valuation & Bias Detection – Cook County, Illinois | Jade Chen</title>
+  <title>Property Valuation & Bias Detection - Cook County, Illinois | Jade Chen</title>
+  <meta name="description" content="Predictive modeling and bias detection project analyzing Cook County property valuations and regressive assessment patterns.">
+  <link rel="canonical" href="https://jadechen.site/projects/cook-county.html">
+  <meta name="theme-color" content="#f9fafb">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Jade Chen">
+  <meta property="og:title" content="Property Valuation & Bias Detection | Jade Chen">
+  <meta property="og:description" content="A Cook County housing analysis focused on valuation accuracy, regression modeling, and tax bias detection.">
+  <meta property="og:url" content="https://jadechen.site/projects/cook-county.html">
+  <meta property="og:image" content="https://jadechen.site/assets/images/cook-county-figure1.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Property Valuation & Bias Detection | Jade Chen">
+  <meta name="twitter:description" content="A Cook County housing analysis focused on valuation accuracy, regression modeling, and tax bias detection.">
+  <meta name="twitter:image" content="https://jadechen.site/assets/images/cook-county-figure1.png">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+  <script src="../assets/js/site.js"></script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans p-6 max-w-3xl mx-auto">
-  <div class="flex justify-between items-center">
-    <a href="../index.html" class="text-blue-600 hover:underline">← Back to Home</a>
-  </div>
+<body class="bg-gray-50 text-gray-800 font-sans transition-colors duration-300 dark:bg-neutral-900 dark:text-gray-200">
+  <main class="mx-auto max-w-3xl p-6">
+    <div class="flex items-center justify-between">
+      <a href="../index.html" class="text-blue-600 hover:underline">Back to Home</a>
+      <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode" aria-pressed="false">💡</button>
+    </div>
 
-  <h1 class="text-3xl font-bold mt-4">🏘️ Property Valuation & Bias Detection – Cook County, Illinois</h1>
-  <div class="mt-2 flex gap-4">
-    <a href="https://nbviewer.org/github/jad3ch3n/cook-county-housing/blob/main/cook-county-analysis.ipynb" target="_blank" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">View Notebook</a>
-    <a href="https://github.com/jad3ch3n/cook-county-housing" target="_blank" rel="noopener" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Github Repo</a>
-  </div>
+    <h1 class="mt-4 text-3xl font-bold">Property Valuation & Bias Detection - Cook County, Illinois</h1>
+    <div class="mt-3 flex flex-wrap gap-4">
+      <a href="https://nbviewer.org/github/jad3ch3n/cook-county-housing/blob/main/cook-county-analysis.ipynb" target="_blank" class="inline-block rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700">View Notebook</a>
+      <a href="https://github.com/jad3ch3n/cook-county-housing" target="_blank" class="inline-block rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700">GitHub Repo</a>
+      <a href="cook-county-viewer.html" class="inline-block rounded border border-gray-300 px-4 py-2 transition hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-neutral-800">Open Paper Viewer</a>
+    </div>
 
-  <h2 class="text-xl font-semibold mt-6">Abstract</h2>
-  <p>This study examines the determinants of 2013 to 2019 residential property sale prices in Cook County, Illinois using a three-stage linear modeling approach. Beginning with a simple univariate model based on bedroom count, I iteratively introduce building size and then a comprehensive set of engineered features (including log-transformed area measures, tax assessor estimates, fireplace counts, repair condition scores, central air conditioning status, and categorical encodings of room counts). My final model trained on 204,792 property transactions achieves a root-mean-square error (RMSE) of 0.3716 in predicting log sale price, representing a substantial 57% improvement over the baseline. I also find that lower-priced homes are systematically overestimated, illustrating a regressive bias that can exacerbate tax burdens on low-income residents. Drawing from local journalism and policy research, I discuss how tax appeal processes, neighborhood demographics, and historical segregation intersect with model performance to compound unfair outcomes.</p>
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">Abstract</h2>
+      <p>This study examines the determinants of 2013 to 2019 residential property sale prices in Cook County, Illinois using a three-stage linear modeling approach. Beginning with a simple univariate model based on bedroom count, I iteratively introduce building size and then a comprehensive set of engineered features including log-transformed area measures, tax assessor estimates, fireplace counts, repair condition scores, central air conditioning status, and categorical encodings of room counts.</p>
+      <p>My final model trained on 204,792 property transactions achieves a root-mean-square error (RMSE) of 0.3716 in predicting log sale price, representing a substantial 57% improvement over the baseline. I also find that lower-priced homes are systematically overestimated, illustrating a regressive bias that can exacerbate tax burdens on low-income residents.</p>
+    </section>
 
-  <h2 class="text-xl font-semibold mt-6">1. Introduction</h2>
-  <p>Accurate prediction of residential sale prices is crucial for market transparency, equitable property taxation, and urban planning. While hedonic price models have long incorporated structural and locational attributes, advances in data pipelines and feature engineering now allow for larger-scale, reproducible analyses. This paper details a structured approach to modeling Cook County sale prices, emphasizing clarity, reproducibility, and interpretability. I additionally interrogate how residual errors map onto price strata, revealing a regressive pattern that aligns with critiques of Cook County’s assessment practices.</p>
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">1. Introduction</h2>
+      <p>Accurate prediction of residential sale prices is crucial for market transparency, equitable property taxation, and urban planning. This project documents a reproducible modeling workflow and uses residual analysis to surface fairness concerns, especially in lower-value housing segments.</p>
+    </section>
 
-  <h2 class="text-xl font-semibold mt-6">2. Data Description</h2>
-  <p>The primary dataset (<code>cook_county_train.csv</code>) contains 204,792 records and 62 features, including physical attributes (e.g., building square footage, number of bedrooms), material characteristics (e.g., roof and wall types), condition assessments, and tax assessor estimates for land and building values. A companion codebook (<code>data/codebook.txt</code>) describes each variable.</p>
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">2. Data Description</h2>
+      <p>The primary dataset contains 204,792 records and 62 features, including physical housing attributes, material characteristics, condition assessments, and tax assessor estimates for land and building values.</p>
+    </section>
 
-  <h2 class="text-xl font-semibold mt-6">3. Data Cleaning & Exploratory Analysis</h2>
-  <ol class="list-decimal list-inside space-y-1">
-    <li><strong>Outlier Removal:</strong> Excluded properties with sale prices below $499 to eliminate data entry errors and symbolic transactions.</li>
-    <li><strong>Missing Values:</strong> Removed or imputed missing entries for critical predictors (e.g., square footage).</li>
-    <li><strong>Univariate Distributions:</strong> Sale Year/Month: Sales span multiple years, with peak activity in summer months; Sale Price: Right-skewed; log transformation employed.</li>
-    <li><strong>Correlation Analysis:</strong> Building square footage and assessor estimates exhibit strong positive correlations (r &gt; 0.75) with sale price.</li>
-    <li><strong>Feature Relationships:</strong> Residual plots from early models revealed heteroscedasticity and nonlinear patterns, motivating log transforms and expanded predictors.</li>
-  </ol>
-  <div class="space-y-4 my-4">
-    <img src="../assets/images/cook-county-figure1.png" alt="Distribution of Log Sale Price" class="w-full rounded shadow">
-    <img src="../assets/images/cook-county-figure2.png" alt="Log Sale Price by Number of Bedrooms" class="w-full rounded shadow">
-  </div>
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">3. Data Cleaning & Exploratory Analysis</h2>
+      <ol class="list-decimal space-y-2 pl-5">
+        <li><strong>Outlier removal:</strong> Excluded properties with sale prices below $499 to eliminate data-entry errors and symbolic transactions.</li>
+        <li><strong>Missing values:</strong> Removed or imputed missing entries for critical predictors.</li>
+        <li><strong>Distributions:</strong> Sale prices were right-skewed, so a log transformation was used.</li>
+        <li><strong>Correlation analysis:</strong> Building square footage and assessor estimates showed strong positive correlations with sale price.</li>
+        <li><strong>Feature relationships:</strong> Residual analysis motivated log transforms and expanded predictors.</li>
+      </ol>
+      <div class="space-y-4">
+        <img src="../assets/images/cook-county-figure1.png" alt="Distribution of log sale price" class="w-full rounded-lg shadow">
+        <img src="../assets/images/cook-county-figure2.png" alt="Log sale price by number of bedrooms" class="w-full rounded-lg shadow">
+      </div>
+    </section>
 
-  <h2 class="text-xl font-semibold mt-6">4. Modeling Framework</h2>
-  <ol class="list-decimal list-inside space-y-1">
-    <li><strong>Baseline Model (Model 1):</strong> Features: Total bedroom count; Pipeline: outlier removal, log-transform price; Estimator: OLS; Purpose: benchmark.</li>
-    <li><strong>Intermediate Model (Model 2):</strong> Features: Bedrooms + log(building sq ft); Pipeline: same as Baseline; Evaluation: residual analysis.</li>
-    <li><strong>Final Model (Model 3):</strong> Features (13 total): log-transformed sale price, building/land sq ft, assessor estimates, engineered fireplaces, repair condition, binary central air, one-hot room counts; Estimator: LinearRegression; Evaluation: RMSE.</li>
-  </ol>
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">4. Modeling Framework</h2>
+      <ol class="list-decimal space-y-2 pl-5">
+        <li><strong>Baseline model:</strong> Bedrooms only.</li>
+        <li><strong>Intermediate model:</strong> Bedrooms plus log building square footage.</li>
+        <li><strong>Final model:</strong> 13 engineered predictors with linear regression and RMSE evaluation.</li>
+      </ol>
+    </section>
 
-  <h2 class="text-xl font-semibold mt-6">5. Results & Evaluation</h2>
-  <table class="w-full text-left border-collapse my-4">
-    <thead>
-      <tr>
-        <th class="border-b px-2 py-1">Model</th>
-        <th class="border-b px-2 py-1">Engineered Feature(s)</th>
-        <th class="border-b px-2 py-1">RMSE (multiplier error)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="border-b px-2 py-1">Model 1 (Baseline)</td>
-        <td class="border-b px-2 py-1">Bedrooms</td>
-        <td class="border-b px-2 py-1">0.8674 (~×2.38 error)</td>
-      </tr>
-      <tr>
-        <td class="border-b px-2 py-1">Model 2 (Intermediate)</td>
-        <td class="border-b px-2 py-1">Bedrooms + Log Area</td>
-        <td class="border-b px-2 py-1">0.8059 (~×2.24 error)</td>
-      </tr>
-      <tr>
-        <td class="border-b px-2 py-1">Model 3 (Final)</td>
-        <td class="border-b px-2 py-1">13 Predictors</td>
-        <td class="border-b px-2 py-1">0.3716 (~×1.45 error)</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="space-y-4 my-4">
-    <img src="../assets/images/cook-county-figure3.png" alt="Overestimation Rate by Price Strata" class="w-full rounded shadow">
-    <img src="../assets/images/cook-county-figure4.png" alt="Residuals vs. True Log Sale Price" class="w-full rounded shadow">
-    <img src="../assets/images/cook-county-figure5.png" alt="RMSE by Price Strata" class="w-full rounded shadow">
-  </div>
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">5. Results & Evaluation</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse text-left">
+          <thead>
+            <tr>
+              <th class="border-b border-gray-300 px-2 py-2 dark:border-gray-700">Model</th>
+              <th class="border-b border-gray-300 px-2 py-2 dark:border-gray-700">Engineered Feature(s)</th>
+              <th class="border-b border-gray-300 px-2 py-2 dark:border-gray-700">RMSE (multiplier error)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border-b border-gray-200 px-2 py-2 dark:border-gray-800">Model 1</td>
+              <td class="border-b border-gray-200 px-2 py-2 dark:border-gray-800">Bedrooms</td>
+              <td class="border-b border-gray-200 px-2 py-2 dark:border-gray-800">0.8674 (~x2.38 error)</td>
+            </tr>
+            <tr>
+              <td class="border-b border-gray-200 px-2 py-2 dark:border-gray-800">Model 2</td>
+              <td class="border-b border-gray-200 px-2 py-2 dark:border-gray-800">Bedrooms + log area</td>
+              <td class="border-b border-gray-200 px-2 py-2 dark:border-gray-800">0.8059 (~x2.24 error)</td>
+            </tr>
+            <tr>
+              <td class="border-b border-gray-200 px-2 py-2 dark:border-gray-800">Model 3</td>
+              <td class="border-b border-gray-200 px-2 py-2 dark:border-gray-800">13 predictors</td>
+              <td class="border-b border-gray-200 px-2 py-2 dark:border-gray-800">0.3716 (~x1.45 error)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="space-y-4">
+        <img src="../assets/images/cook-county-figure3.png" alt="Overestimation rate by price strata" class="w-full rounded-lg shadow">
+        <img src="../assets/images/cook-county-figure4.png" alt="Residuals versus true log sale price" class="w-full rounded-lg shadow">
+        <img src="../assets/images/cook-county-figure5.png" alt="RMSE by price strata" class="w-full rounded-lg shadow">
+      </div>
+    </section>
 
-  <h2 class="text-xl font-semibold mt-6">6. Discussion & Next Steps</h2>
-  <ol class="list-decimal list-inside space-y-1">
-    <li><strong>Interpretability & Equity:</strong> Model coefficients remain interpretable; regressive bias leads to higher tax burdens on low-income owners, echoing Chicago Tribune investigations.</li>
-    <li><strong>Systemic Context:</strong> Higher-value homeowners more likely to appeal assessments; historical segregation correlates with housing underinvestment; policy implications include fairness-aware modeling and appeal assistance.</li>
-    <li><strong>Residual Analysis by Price Strata:</strong> Lowest quintile homes are systematically overestimated, indicating regressive taxation biases.</li>
-    <li><strong>Next Steps:</strong> Incorporate spatial/hierarchical models; experiment with fairness-aware and ensemble methods; build stakeholder dashboards.</li>
-  </ol>
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">6. Discussion & Next Steps</h2>
+      <ol class="list-decimal space-y-2 pl-5">
+        <li><strong>Interpretability & equity:</strong> The model remains interpretable, but regressive bias leads to disproportionate tax burdens on lower-income owners.</li>
+        <li><strong>Systemic context:</strong> Appeal access, neighborhood demographics, and historical segregation shape how these errors land in practice.</li>
+        <li><strong>Residual analysis:</strong> The lowest-price homes are systematically overestimated.</li>
+        <li><strong>Future work:</strong> Test spatial or fairness-aware models and build stakeholder-facing reporting tools.</li>
+      </ol>
+    </section>
 
-  <h2 class="text-xl font-semibold mt-6">7. Conclusion</h2>
-  <p>This analysis demonstrates that a reproducible hedonic modeling workflow cuts RMSE from 0.87 to 0.37 and uncovers a regressive taxation bias in Cook County, Illinois. There exists a systematic overestimation of lower-priced homes, intensifying price burdens for their owners.</p>
-  <p class="mt-4">Even accurate models can reinforce systemic inequity if their errors fall disproportionately on disadvantaged groups. Predictive models must go beyond technical accuracy to incorporate fairness, transparency, and local context. Without thoughtful oversight, even the most statistically sound models risk amplifying racial and economic disparities. Future work should integrate fairness metrics and spatial controls to ensure more equitable assessment outcomes.</p>
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">7. Conclusion</h2>
+      <p>This analysis demonstrates that a reproducible hedonic modeling workflow can sharply reduce error while still exposing harmful bias patterns. Predictive systems should be evaluated not only for technical accuracy but also for whether their mistakes disproportionately affect vulnerable communities.</p>
+    </section>
 
-  <h2 class="text-xl font-semibold mt-6">References</h2>
-  <ol class="list-decimal list-inside space-y-1">
-    <li>Cook County Assessor’s Office. <em>Cook County Property Codebook.</em> 2025.</li>
-    <li>Chicago Tribune investigations on property assessment disparities.</li>
-    <li>Hastie, T., Tibshirani, R., & Friedman, J. (2009). <em>The Elements of Statistical Learning.</em> Springer.</li>
-    <li>Kuhn, M., & Johnson, K. (2019). <em>Feature Engineering and Selection.</em> CRC Press.</li>
-  </ol>
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">References</h2>
+      <ol class="list-decimal space-y-2 pl-5">
+        <li>Cook County Assessor's Office. <em>Cook County Property Codebook.</em></li>
+        <li>Chicago Tribune investigations on property assessment disparities.</li>
+        <li>Hastie, Tibshirani, and Friedman. <em>The Elements of Statistical Learning.</em></li>
+        <li>Kuhn and Johnson. <em>Feature Engineering and Selection.</em></li>
+      </ol>
+    </section>
 
-  <footer class="text-center text-sm text-gray-500 mt-12">
-    <p>&copy; 2025 Jade Chen</p>
-  </footer>
+    <footer class="mt-12 text-center text-sm text-gray-500 dark:text-gray-300">
+      <p>&copy; 2026 Jade Chen</p>
+    </footer>
+  </main>
 
   <script>
-    const themeToggle = document.createElement('button');
-    themeToggle.id = 'theme-toggle';
-    themeToggle.className = 'text-yellow-500 hover:text-yellow-300 text-xl';
-    themeToggle.setAttribute('aria-label', 'Toggle Dark Mode');
-    themeToggle.textContent = '💡';
-
-    const body = document.body;
-    const footer = document.querySelector('footer');
-
-    function enableDarkMode() {
-      body.classList.remove('bg-gray-50', 'text-gray-800');
-      body.classList.add('bg-neutral-900', 'text-gray-300');
-      footer.classList.remove('bg-stone-200');
-      footer.classList.add('bg-neutral-800');
-      localStorage.setItem('theme', 'dark');
-    }
-
-    function disableDarkMode() {
-      body.classList.add('bg-gray-50', 'text-gray-800');
-      body.classList.remove('bg-neutral-900', 'text-gray-300');
-      footer.classList.add('bg-stone-200');
-      footer.classList.remove('bg-neutral-800');
-      localStorage.setItem('theme', 'light');
-    }
-
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      enableDarkMode();
-    } else {
-      disableDarkMode();
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const isDark = body.classList.contains('bg-neutral-900');
-      if (isDark) {
-        disableDarkMode();
-      } else {
-        enableDarkMode();
-      }
-    });
-
-    document.querySelector('.flex').appendChild(themeToggle);
+    JadeSite.initThemeToggle();
+    JadeSite.decorateExternalLinks();
   </script>
 </body>
 </html>
