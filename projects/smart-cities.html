@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🦠 Smart Cities Pandemic Policy Evaluation – India | Jade Chen</title>
+  <title>Smart Cities Pandemic Policy Evaluation - India | Jade Chen</title>
   <meta name="description" content="Econometrics and policy evaluation project assessing the Smart Cities Mission and COVID-19 outcomes across Indian cities.">
   <link rel="canonical" href="https://jadechen.site/projects/smart-cities.html">
+  <meta name="theme-color" content="#f9fafb">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Jade Chen">
   <meta property="og:title" content="Smart Cities Pandemic Policy Evaluation | Jade Chen">
@@ -17,134 +19,90 @@
   <meta name="twitter:description" content="An econometrics-focused project evaluating pandemic policy outcomes across Indian smart cities.">
   <meta name="twitter:image" content="https://jadechen.site/assets/images/profile-pic.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body id="body" class="bg-gray-50 text-gray-800 font-sans p-6 max-w-3xl mx-auto transition-colors duration-300">
-  <div class="flex justify-between items-center">
-    <a href="../index.html" class="text-blue-600 hover:underline">← Back to Home</a>
-    <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode">💡</button>
-  </div>
-
-  <h1 class="text-3xl font-bold mt-4">🦠 Smart Cities Pandemic Policy Evaluation – India</h1>
-  <div class="mt-2">
-    <a href="smart-cities-viewer.html" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover">View Full Paper</a>
-  </div>
-
-  <h2 class="text-xl font-semibold mt-6">1. Policy Background</h2>
-  <p>The Smart Cities Mission (SCM) is an urban renewal initiative by the Indian government aimed at improving urban infrastructure, sustainability, and quality of life through technology. During the COVID-19 pandemic, 45 cities repurposed their Integrated Control and Command Centres (ICCCs) into COVID-19 War Rooms. These centers enabled real-time monitoring, data tracking, contact tracing, and public health support services, including outreach to vulnerable groups and use of drones, telemedicine, and sanitization stations.</p>
-
-  <h2 class="text-xl font-semibold mt-6">2. Literature Review</h2>
-  <ul class="list-disc ml-6">
-    <li><strong>Mullick et al. (2022)</strong>: Highlights the digital divide in smart cities, stressing the exclusion of marginalized populations.</li>
-    <li><strong>Deloitte (2020)</strong>: Analyzes case studies of Indian smart cities’ COVID-19 response across themes like War Rooms and social services.</li>
-  </ul>
-
-  <h2 class="text-xl font-semibold mt-6">3. Research Design</h2>
-  <p>A cross-sectional analysis comparing 100 Smart Cities with 100 non-Smart Cities. The key goal is to measure the impact of smart infrastructure on COVID-19 outcomes like case and death rates. Data comes from government databases and smart city reports.</p>
-
-  <h2 class="text-xl font-semibold mt-6">4. Outcome Variables</h2>
-  <ul class="list-disc ml-6">
-    <li>COVID-19 death rates</li>
-    <li>Total number of positive cases</li>
-  </ul>
-
-  <h2 class="text-xl font-semibold mt-6">5. Control Variables</h2>
-  <p>To isolate the effect of smart infrastructure, we control for:</p>
-  <ul class="list-disc ml-6">
-    <li>Smart City selection score (2015)</li>
-    <li>Income, population density, government funding</li>
-    <li>Education, vaccine coverage, age, gender</li>
-    <li>Policies on lockdowns, social distancing, and masks</li>
-  </ul>
-
-  <h2 class="text-xl font-semibold mt-6">6. Main Regression Equation</h2>
-  <p>We elect a difference-in-differences model to compare COVID-19 outcomes between cities with and without the Smart Cities Mission.</p>
-  <p>Our main regression equation reads:</p>
-  <code class="block p-2 rounded text-sm overflow-x-auto font-mono bg-white text-black dark:bg-neutral-800 dark:text-gray-200">
-    Y<sub>i</sub> = β₀ + β₁SmartCity<sub>i</sub> + β₂Scores<sub>i</sub> + β₃AverageIncome<sub>i</sub> + β₄PopulationDensity<sub>i</sub> + β₅GovernmentFunding<sub>i</sub> + β₆EducationProportion<sub>i</sub> + β₇VaccineCoverage<sub>i</sub> + β₈AverageAge<sub>i</sub> + β₉GenderDistribution<sub>i</sub> + β₁₀LockdownPolicy<sub>i</sub> + β₁₁SocialDistancing<sub>i</sub> + β₁₂MaskMandates<sub>i</sub> + ε<sub>i</sub>
-  </code>
-  <p>Where σ<sub>c</sub> includes control variables and SmartCity<sub>i</sub> is a binary indicator.</p>
-
-  <p class="mt-4">For easier readability, the equation can be simplified to:</p>
-  <code class="block p-2 rounded text-sm overflow-x-auto font-mono bg-white text-black dark:bg-neutral-800 dark:text-gray-200">
-    Y<sub>i</sub> = β₀ + β₁SmartCity<sub>i</sub> + σ<sub>c</sub> + ε<sub>i</sub>
-  </code>
-  <p>Where σ<sub>c</sub> is a vector of control variables that includes:</p>
-  <ul class="list-disc ml-6">
-    <li>Smart City selection scores (2015)</li>
-    <li>Average income</li>
-    <li>Population density</li>
-    <li>Government funding</li>
-    <li>Education levels</li>
-    <li>Vaccine coverage rate</li>
-    <li>Average age</li>
-    <li>Gender distribution</li>
-    <li>Binary variables for lockdown policies, social distancing, and mask mandates</li>
-  </ul>
-
-  <h2 class="text-xl font-semibold mt-6">7. Additional Analyses</h2>
-  <ul class="list-disc ml-6">
-    <li>Sensitivity analysis (varying bandwidths, robustness)</li>
-    <li>Cost-benefit analysis (comparing infrastructure costs with public health benefits)</li>
-    <li>Time-series trends (infection rates, response efficiency over time)</li>
-  </ul>
-
-  <h2 class="text-xl font-semibold mt-6">8. Policy Discussion</h2>
-  <p>If the treatment effect is significant, it supports further investment in SCM and smart public health infrastructure. If not, refinement—not abandonment—of current interventions is needed.</p>
-
-  <footer class="bg-stone-200 text-center p-4 mt-12">
-    <p>&copy; 2025 Jade Chen</p>
-  </footer>
- 
   <script>
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.getElementById('body');
-    const footer = document.querySelector('footer');
+    tailwind.config = { darkMode: 'class' };
+  </script>
+  <script src="../assets/js/site.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans transition-colors duration-300 dark:bg-neutral-900 dark:text-gray-200">
+  <main class="mx-auto max-w-3xl p-6">
+    <div class="flex items-center justify-between">
+      <a href="../index.html" class="text-blue-600 hover:underline">Back to Home</a>
+      <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode" aria-pressed="false">💡</button>
+    </div>
 
-    function enableDarkMode() {
-      body.classList.remove('bg-gray-50', 'text-gray-800');
-      body.classList.add('bg-neutral-900', 'text-gray-300');
-      footer.classList.remove('bg-stone-200');
-      footer.classList.add('bg-neutral-800');
+    <h1 class="mt-4 text-3xl font-bold">Smart Cities Pandemic Policy Evaluation - India</h1>
+    <div class="mt-3">
+      <a href="smart-cities-viewer.html" class="inline-block rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700">View Full Paper</a>
+    </div>
 
-      // Update code blocks
-      document.querySelectorAll('code').forEach(codeBlock => {
-        codeBlock.style.backgroundColor = '#2d2d2d'; // Lighter gray background
-        codeBlock.style.color = '#e5e7eb'; // Light text
-      });
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">1. Policy Background</h2>
+      <p>The Smart Cities Mission is an urban renewal initiative by the Indian government aimed at improving infrastructure, sustainability, and quality of life through technology. During the COVID-19 pandemic, 45 cities repurposed their Integrated Control and Command Centres into COVID-19 war rooms for monitoring, tracing, telemedicine, and service coordination.</p>
+    </section>
 
-      localStorage.setItem('theme', 'dark');
-    }
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">2. Literature Review</h2>
+      <ul class="list-disc space-y-2 pl-5">
+        <li><strong>Mullick et al. (2022)</strong>: Highlights the digital divide in smart cities and the exclusion risks for marginalized populations.</li>
+        <li><strong>Deloitte (2020)</strong>: Reviews case studies of Indian smart cities' pandemic response strategies.</li>
+      </ul>
+    </section>
 
-    function disableDarkMode() {
-      body.classList.add('bg-gray-50', 'text-gray-800');
-      body.classList.remove('bg-neutral-900', 'text-gray-300');
-      footer.classList.add('bg-stone-200');
-      footer.classList.remove('bg-neutral-800');
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">3. Research Design</h2>
+      <p>This study uses a cross-sectional design comparing 100 smart cities with 100 non-smart cities to measure whether smart infrastructure affected case and death outcomes during the pandemic.</p>
+    </section>
 
-      // Update code blocks
-      document.querySelectorAll('code').forEach(codeBlock => {
-        codeBlock.style.backgroundColor = '#d6d3d1'; // bg-stone-200 color
-        codeBlock.style.color = '#000000'; // Dark text
-      });
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">4. Outcome Variables</h2>
+      <ul class="list-disc space-y-2 pl-5">
+        <li>COVID-19 death rates</li>
+        <li>Total positive cases</li>
+      </ul>
+    </section>
 
-      localStorage.setItem('theme', 'light');
-    }
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">5. Control Variables</h2>
+      <ul class="list-disc space-y-2 pl-5">
+        <li>Smart City selection score (2015)</li>
+        <li>Income, population density, and government funding</li>
+        <li>Education, vaccine coverage, age, and gender</li>
+        <li>Lockdown, distancing, and mask policies</li>
+      </ul>
+    </section>
 
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      enableDarkMode();
-    } else {
-      disableDarkMode();
-    }
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">6. Main Regression Equation</h2>
+      <p>The core evaluation uses a difference-in-differences framework to estimate how smart-city infrastructure changed public-health outcomes.</p>
+      <code class="block overflow-x-auto rounded bg-white p-3 text-sm text-black shadow dark:bg-neutral-800 dark:text-gray-100">
+        Y_i = beta_0 + beta_1 SmartCity_i + sigma_c + epsilon_i
+      </code>
+      <p>Here, sigma_c represents the vector of control variables listed above.</p>
+    </section>
 
-    themeToggle?.addEventListener('click', () => {
-      const isDark = body.classList.contains('bg-neutral-900');
-      if (isDark) {
-        disableDarkMode();
-      } else {
-        enableDarkMode();
-      }
-    });
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">7. Additional Analyses</h2>
+      <ul class="list-disc space-y-2 pl-5">
+        <li>Sensitivity analysis and bandwidth checks</li>
+        <li>Cost-benefit analysis of smart infrastructure spending</li>
+        <li>Time-series comparisons of infection and response trends</li>
+      </ul>
+    </section>
+
+    <section class="mt-8 space-y-4">
+      <h2 class="text-xl font-semibold">8. Policy Discussion</h2>
+      <p>If the treatment effect is significant, the results support further investment in smart public-health infrastructure. If the effect is weak or mixed, the implication is refinement rather than abandonment of the current intervention model.</p>
+    </section>
+
+    <footer class="mt-12 bg-stone-200 p-4 text-center dark:bg-neutral-800 dark:text-gray-300">
+      <p>&copy; 2026 Jade Chen</p>
+    </footer>
+  </main>
+
+  <script>
+    JadeSite.initThemeToggle();
+    JadeSite.decorateExternalLinks();
   </script>
 </body>
 </html>

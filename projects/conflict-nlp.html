@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🌏 Political Reservations on Subnational Conflict – India | Jade Chen</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Political Reservations on Subnational Conflict - India | Jade Chen</title>
   <meta name="description" content="NLP and conflict analysis project examining how political reservations influence subnational conflict narratives in India.">
   <link rel="canonical" href="https://jadechen.site/projects/conflict-nlp.html">
+  <meta name="theme-color" content="#f9fafb">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Jade Chen">
   <meta property="og:title" content="Political Reservations on Subnational Conflict | Jade Chen">
@@ -17,158 +19,91 @@
   <meta name="twitter:description" content="A research project using NLP and supervised learning to analyze conflict framing in India.">
   <meta name="twitter:image" content="https://jadechen.site/assets/images/profile-pic.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+  <script src="../assets/js/site.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
   <style>
-    pre, code {
-  margin: 0;
-  padding: 0;
-  line-height: 1;
-}
-
-pre {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-pre code {
-  display: inline;
-}
+    .code-pane { display: none; }
+    .code-pane.active { display: block; }
+    .project-card.selected { box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.55); }
+    html.dark body { background-color: #111827; color: #e5e7eb; }
+    html.dark .surface { background-color: #1f2937; border-color: #374151; }
+    html.dark .muted { color: #d1d5db; }
+    html.dark .project-card { background-color: #1f2937; }
+    html.dark .tab-button.inactive { background-color: #374151; color: #f3f4f6; }
+    html.dark pre, html.dark code { background-color: #111827; color: #f9fafb; }
+    html.dark a:not(.inline-block):not(.tab-button) { color: #93c5fd; }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans p-6 max-w-3xl mx-auto">
-  <div class="flex justify-between items-center">
-    <a href="../index.html" class="text-blue-600 hover:underline">← Back to Home</a>
-    <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode">💡</button>
-  </div>
+<body class="bg-gray-50 text-gray-800 font-sans transition-colors duration-300 dark:bg-neutral-900 dark:text-gray-200">
+  <main class="mx-auto max-w-4xl p-6">
+    <div class="flex items-center justify-between">
+      <a href="../index.html" class="text-blue-600 hover:underline">Back to Home</a>
+      <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode" aria-pressed="false">💡</button>
+    </div>
 
-  <h1 class="text-3xl font-bold mt-4">🌏 Political Reservations on Subnational Conflict – India</h1>
+    <h1 class="mt-4 text-3xl font-bold">Political Reservations on Subnational Conflict - India</h1>
+    <div class="mt-3">
+      <a href="https://github.com/jonathanold/conflict-india" target="_blank" class="inline-block rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700">
+        View Project on GitHub
+      </a>
+    </div>
 
-  <div class="mt-2">
-<a href="https://github.com/jonathanold/conflict-india" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animate-hover">
-  View Project on GitHub
-</a>
-  </div>
+    <div class="mt-6 space-y-4">
+      <p>As part of my Undergraduate Research Apprenticeship at UC Berkeley, I contributed to a group research initiative led by Jonathan Old. Our team examined how mandated political representation in India influences low-level subnational conflict.</p>
+      <p>Using more than 195,000 conflict event records from ACLED and SATP, I applied natural language processing techniques to classify conflict type, analyze sentiment, and identify patterns in political framing. This work included developing a BERT-based classifier and a preprocessing script to clean and tokenize conflict notes.</p>
+      <p>Our empirical findings suggest conflict decreases in constituencies where reservations do not rotate, supporting the idea that stable minority representation can reduce political tension when reelection incentives exist.</p>
+    </div>
 
-  <p class="mt-4">
-  As part of my Undergraduate Research Apprenticeship at UC Berkeley, I contributed to a group research initiative led by Jonathan Old. Our team examined how mandated political representation (reservations) in India influences low-level subnational conflict.
-</p>
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold">Code Examples</h2>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">Two representative code samples from the project are included below with cleaned formatting and links to the original gists.</p>
 
-<p class="mt-4">
-  Using over 195,000 text-based conflict event records from ACLED and SATP, I applied natural language processing techniques to classify conflict type, analyze sentiment, and identify patterns in political framing. This work involved developing a BERT-based classifier to categorize events and a preprocessing script to clean and tokenize conflict notes.
-</p>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        <button class="project-card selected rounded-2xl border border-gray-200 bg-white p-4 text-left transition hover:shadow-lg dark:border-gray-700 dark:bg-neutral-800" data-tab="satp">
+          <h3 class="text-xl font-semibold">SATP Event Categorizer</h3>
+          <p class="muted mt-2 text-sm text-gray-600">BERT plus regex classifier for political event types in the SATP dataset.</p>
+          <div class="mt-3 flex flex-wrap gap-2 text-xs text-white">
+            <span class="rounded-full bg-blue-600 px-2 py-1">Python</span>
+            <span class="rounded-full bg-purple-600 px-2 py-1">BERT</span>
+            <span class="rounded-full bg-pink-500 px-2 py-1">spaCy</span>
+            <span class="rounded-full bg-green-600 px-2 py-1">Regex</span>
+          </div>
+        </button>
 
-<p class="mt-4">
-  We developed a formal model of targeted public goods provision, which predicts reduced conflict when reservations benefit large, economically disadvantaged groups, particularly when politicians face reelection incentives. These predictions were tested using constituency-level conflict data and village-level survey results.
-</p>
-
-<p class="mt-4">
-  Empirical findings show that in constituencies where reservations do not rotate, conflict tends to decrease, supporting the idea that consistent minority representation can reduce political tensions. In contrast, conflict levels remain unchanged or slightly increase at the village level where reservations rotate and reelection is not possible. These results suggest that the design of reservation policies, especially term limits and incentive structures, plays a critical role in shaping their impact on political stability.
-</p>
-
-  <!-- 🧠 Project Cards (now act as tab buttons) -->
-  <div class="grid gap-4 sm:grid-cols-2 mt-8">
-    <!-- SATP Card -->
-    <div
-      class="project-card rounded-2xl shadow p-4 bg-white hover:shadow-lg transition cursor-pointer"
-      data-tab="satp"
-    >
-      <h3 class="text-xl font-semibold mb-1">🧠 SATP Event Categorizer</h3>
-      <p class="text-sm text-gray-600 mb-2">
-        BERT + Regex classifier for political event types from the SATP dataset.
-      </p>
-      <div class="flex gap-2 flex-wrap text-xs text-white">
-        <span class="bg-blue-600 px-2 py-1 rounded-full">Python</span>
-        <span class="bg-purple-600 px-2 py-1 rounded-full">BERT</span>
-        <span class="bg-pink-500 px-2 py-1 rounded-full">spaCy</span>
-        <span class="bg-green-500 px-2 py-1 rounded-full">Regex</span>
+        <button class="project-card rounded-2xl border border-gray-200 bg-white p-4 text-left transition hover:shadow-lg dark:border-gray-700 dark:bg-neutral-800" data-tab="acled">
+          <h3 class="text-xl font-semibold">ACLED Preprocessing Script</h3>
+          <p class="muted mt-2 text-sm text-gray-600">Tokenization, normalization, and lemmatization pipeline for ACLED conflict notes.</p>
+          <div class="mt-3 flex flex-wrap gap-2 text-xs text-white">
+            <span class="rounded-full bg-blue-600 px-2 py-1">Python</span>
+            <span class="rounded-full bg-yellow-500 px-2 py-1">NLTK</span>
+            <span class="rounded-full bg-indigo-500 px-2 py-1">Regex</span>
+            <span class="rounded-full bg-red-500 px-2 py-1">Text Cleaning</span>
+          </div>
+        </button>
       </div>
-    </div>
 
-    <!-- ACLED Card -->
-    <div
-      class="project-card rounded-2xl shadow p-4 bg-white hover:shadow-lg transition cursor-pointer"
-      data-tab="acled"
-    >
-      <h3 class="text-xl font-semibold mb-1">📊 ACLED Preprocessing Script</h3>
-      <p class="text-sm text-gray-600 mb-2">
-        Lemmatizes and tokenizes ACLED conflict notes with NLTK for downstream NLP tasks.
-      </p>
-      <div class="flex gap-2 flex-wrap text-xs text-white">
-        <span class="bg-blue-600 px-2 py-1 rounded-full">Python</span>
-        <span class="bg-yellow-500 px-2 py-1 rounded-full">NLTK</span>
-        <span class="bg-indigo-500 px-2 py-1 rounded-full">Regex</span>
-        <span class="bg-teal-600 px-2 py-1 rounded-full">Text Cleaning</span>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <button id="tab-satp" class="tab-button rounded bg-blue-600 px-4 py-2 text-sm text-white" data-tab="satp">SATP Categorizer</button>
+        <button id="tab-acled" class="tab-button inactive rounded bg-gray-200 px-4 py-2 text-sm text-gray-900 dark:bg-gray-700 dark:text-gray-100" data-tab="acled">ACLED Preprocessing</button>
       </div>
-    </div>
-  </div>
 
-
-  <!-- Code Tabs -->
-  <div id="code-tabs" class="mt-10">
-    <h2 class="text-2xl font-bold mb-4">🧪 Code Examples</h2>
-    <div class="flex space-x-4 mb-4">
-      <button
-        id="tab-satp"
-        class="tab-button text-sm px-4 py-2 rounded"
-        data-tab="satp"
-      >
-        SATP Categorizer
-      </button>
-      <button
-        id="tab-acled"
-        class="tab-button text-sm px-4 py-2 rounded"
-        data-tab="acled"
-      >
-        ACLED Preprocessing
-      </button>
-    </div>
-
-    <div class="relative bg-white rounded-xl border p-4 shadow">
-      <!-- SATP -->
-      <div id="content-satp">
-        <h3 class="text-lg font-semibold mb-2">SATP Event Categorizer</h3>
-        <p class="text-sm text-gray-600 mb-4">
-          Uses BERT sentence embeddings and regex rules to classify SATP conflict descriptions into 19 political event categories.
-        </p>
-<details class="mb-4">
-  <summary class="cursor-pointer text-sm text-blue-600">Show imports</summary>
-  <pre class="overflow-x-auto text-sm bg-gray-100 px-3 py-1 rounded"><code class="language-python">
-
-  <pre><code class="language-python">
-from sentence_transformers import SentenceTransformer, util
+      <div class="surface mt-4 rounded-xl border border-gray-200 bg-white p-4 shadow dark:border-gray-700 dark:bg-neutral-800">
+        <section id="content-satp" class="code-pane active">
+          <h3 class="text-lg font-semibold">SATP Event Categorizer</h3>
+          <p class="muted mt-2 text-sm text-gray-600">Uses sentence embeddings and rule-based overrides to map SATP conflict descriptions into 19 political event categories.</p>
+          <pre class="mt-4 overflow-x-auto rounded bg-gray-100 p-4 text-sm dark:bg-neutral-950"><code class="language-python">from sentence_transformers import SentenceTransformer, util
 import spacy
 import pandas as pd
 import re
-  </code></pre>
-</code></pre>
-</details>
-<pre class="overflow-x-auto text-sm bg-gray-100 px-3 py-1 rounded"><code class="language-python">
+
+
 class EventCategorizer:
     def __init__(self):
         self.model = SentenceTransformer("bert-base-nli-mean-tokens")
         self.nlp = spacy.load("en_core_web_sm")
-
-        self.categories = {
-            1: "Police or security forces arrest rebels/terrorists",
-            2: "Police or security forces attack rebels/terrorists",
-            3: "Encounter between police/security forces and rebels/terrorists",
-            4: "Rebel/terrorist surrenders",
-            5: "Police or security forces raid and secure weapons/items",
-            6: "Rebels/terrorists attack civilians",
-            7: "Rebels/terrorists attack police/security",
-            8: "Rebels/terrorists attack infrastructure",
-            9: "Politician statement on conflict",
-            10: "Civilians protest peacefully",
-            11: "Civilians riot or act violently",
-            12: "Politicians reach out to rebels",
-            13: "Former rebel runs for office",
-            14: "Current rebel runs for office",
-            15: "Rebels/terrorists threaten politician",
-            16: "Police/security attack civilians",
-            17: "Government peace/development policy",
-            18: "Indian vs foreign forces clash",
-            19: "Rebel group infighting"
-        }
 
         self.category_templates = {
             1: ["Police arrested a rebel", "Security forces apprehended terrorists"],
@@ -179,39 +114,15 @@ class EventCategorizer:
             6: ["Terrorists opened fire on civilians"],
             7: ["Rebels ambushed a police patrol"],
             8: ["Rebels bombed a bridge"],
-            9: ["The Prime Minister commented on the conflict"],
-            10: ["Civilians held a peaceful protest"],
-            11: ["Civilians rioted in the streets"],
-            12: ["The government reached out to rebels"],
-            13: ["A former rebel contested elections"],
-            14: ["A rebel leader announced candidacy"],
-            15: ["A politician received threats from rebels"],
-            16: ["Security forces fired on protesters"],
-            17: ["The government announced a development program"],
-            18: ["Indian and Pakistani troops exchanged fire"],
-            19: ["Two rebel groups fought each other"]
+            9: ["The Prime Minister commented on the conflict"]
         }
 
         self.event_patterns = {
-            r"police\\s+arrest.*(rebel|terrorist|maoist|cadre)": 1,
-            r"security\\s+forces?\\s+attack.*(rebel|terrorist|militant)": 2,
+            r"police\s+arrest.*(rebel|terrorist|maoist|cadre)": 1,
+            r"security\s+forces?\s+attack.*(rebel|terrorist|militant)": 2,
             r"encounter.*(security|forces|rebel|terrorist|militant)": 3,
-            r"(rebel|terrorist|maoist)\\s+surrender": 4,
-            r"raid.*(weapons|arms|explosives)": 5,
-            r"(militant|terrorist|rebel).*attack.*(civilian|village)": 6,
-            r"(militant|terrorist|rebel).*attack.*(police|security)": 7,
-            r"(militant|terrorist|rebel).*attack.*(bridge|infrastructure)": 8,
-            r"(politician|minister).*(statement|comment).*conflict": 9,
-            r"peaceful\\s+protest": 10,
-            r"(riot|clash|violent)": 11,
-            r"(government|politician).*(reintegrate|amnesty|reach out)": 12,
-            r"former\\s+(rebel|terrorist).*(election|office)": 13,
-            r"current\\s+(rebel|terrorist).*(election|office)": 14,
-            r"(rebel|terrorist).*(threaten|warn).*politician": 15,
-            r"(police|security).*attack.*civilian": 16,
-            r"(policy|program).*peace|development|amnesty": 17,
-            r"clash.*(indian.*foreign|troops|forces)": 18,
-            r"(rebel|terrorist)\\s+group.*(fight|clash|rival)": 19
+            r"(rebel|terrorist|maoist)\s+surrender": 4,
+            r"raid.*(weapons|arms|explosives)": 5
         }
 
     def calculate_similarity(self, sentence1, sentence2):
@@ -230,207 +141,92 @@ class EventCategorizer:
                 best_score = max_score
                 best_category = category
 
-        for pattern, cat in self.event_patterns.items():
+        for pattern, category in self.event_patterns.items():
             if re.search(pattern, description, re.IGNORECASE):
-                best_category = cat
+                best_category = category
                 break
 
-        return best_category or "Unknown"
+        return best_category or "Unknown"</code></pre>
+          <a href="https://gist.github.com/jad3ch3n/34f4bc4e1022a6af91fb4c1dbd2a8a49" target="_blank" class="mt-3 inline-block text-sm text-blue-600 hover:underline">Download on GitHub</a>
+        </section>
 
-categorizer = EventCategorizer()
-df = pd.read_csv(r'C:\\Users\\Jade Chen\\Downloads\\dataset_satp_clean_for_similarity.csv')
-subset = df.head(30)
-subset["category"] = subset["descr_short"].apply(categorizer.categorize_event)
-
-print(subset[["descr_short", "category"]])
-
-counts = subset["category"].value_counts()
-ratios = {cat: count / len(subset) for cat, count in counts.items()}
-
-for cat, ratio in ratios.items():
-    print(f"Category {cat}: {ratio:.2f}")
-</code></pre>
-        <a href="https://gist.github.com/jad3ch3n/34f4bc4e1022a6af91fb4c1dbd2a8a49" target="_blank" class="mt-3 inline-block text-blue-600 hover:underline text-sm">Download on GitHub →</a>
-      </div>
-
-      <!-- ACLED -->
-      <div id="content-acled" class="hidden">
-        <h3 class="text-lg font-semibold mb-2">ACLED NLP Preprocessing</h3>
-        <p class="text-sm text-gray-600 mb-4">
-          Preprocesses ACLED notes using lowercase normalization, tokenization, lemmatization, and stopword/punctuation removal.
-        </p>
-<details class="mb-4">
-  <summary class="cursor-pointer text-sm text-blue-600">Show imports</summary>
-  <pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">
-  <pre><code class="language-python">
-import pandas as pd
+        <section id="content-acled" class="code-pane">
+          <h3 class="text-lg font-semibold">ACLED NLP Preprocessing</h3>
+          <p class="muted mt-2 text-sm text-gray-600">Preprocesses ACLED notes using lowercase normalization, tokenization, lemmatization, and stopword removal.</p>
+          <pre class="mt-4 overflow-x-auto rounded bg-gray-100 p-4 text-sm dark:bg-neutral-950"><code class="language-python">import pandas as pd
 import nltk
-from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer, PorterStemmer
 from nltk.corpus import stopwords
-from nltk import RegexpParser
-from nltk.tree import Tree
+from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import word_tokenize
 from nltk import pos_tag
 import re
-from contextlib import redirect_stdout
-import io
-import seaborn as sns
-import matplotlib.pyplot as plt
-from textblob import TextBlob
 import string
-from collections import Counter
-import statistics
-  </code></pre>
-</code></pre>
-</details>
-<pre class="overflow-x-auto text-sm bg-gray-100 p-4 rounded"><code class="language-python">
+
+
 def nlp_prep(data):
     data = data.copy()
-    data['notes'] = data['notes'].str.lower()
+    data["notes"] = data["notes"].str.lower()
     data = data.drop_duplicates().reset_index(drop=True)
 
-    lem = WordNetLemmatizer()
-    stop = set(stopwords.words('english'))
+    lemmatizer = WordNetLemmatizer()
+    stop_words = set(stopwords.words("english"))
     cleaned_notes = []
 
-    for i in range(len(data)):
-        note = data['notes'].iloc[i]
-        note = re.sub(r'[^0-9A-Za-z]', ' ', note)
-        note = ''.join([char for char in note if char not in string.punctuation])
+    for note in data["notes"]:
+        note = re.sub(r"[^0-9A-Za-z]", " ", note)
+        note = "".join([char for char in note if char not in string.punctuation])
         words = note.split()
         tagged_words = pos_tag(words)
-        cleaned_words = [lem.lemmatize(word) for word, pos in tagged_words if word not in stop]
-        cleaned_note = ' '.join(cleaned_words)
-        cleaned_notes.append(cleaned_note)
+        cleaned_words = [
+            lemmatizer.lemmatize(word)
+            for word, pos in tagged_words
+            if word not in stop_words
+        ]
+        cleaned_notes.append(" ".join(cleaned_words))
 
-    data['cleaned_notes'] = cleaned_notes
-    return data
-</code></pre>
-        <a href="https://gist.github.com/jad3ch3n/9e18f54803597d9b0edda3f897a1f4d1" target="_blank" class="mt-3 inline-block text-blue-600 hover:underline text-sm">Download on GitHub →</a>
+    data["cleaned_notes"] = cleaned_notes
+    return data</code></pre>
+          <a href="https://gist.github.com/jad3ch3n/9e18f54803597d9b0edda3f897a1f4d1" target="_blank" class="mt-3 inline-block text-sm text-blue-600 hover:underline">Download on GitHub</a>
+        </section>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <script>
-    const tabSatp = document.getElementById('tab-satp');
-    const tabAcled = document.getElementById('tab-acled');
-    const contentSatp = document.getElementById('content-satp');
-    const contentAcled = document.getElementById('content-acled');
+    const panes = ['satp', 'acled'];
 
-    const themeToggle = document.getElementById('theme-toggle');
-
-    const body = document.body;
-
-    function enableDarkMode() {
-      body.classList.remove('bg-gray-50', 'text-gray-800');
-      body.classList.add('bg-neutral-900', 'text-gray-300');
-
-      const excludedElements = document.querySelectorAll('.project-card, .tab-button, .code-example');
-      excludedElements.forEach(element => {
-        element.style.color = '';
-        element.style.backgroundColor = '';
+    function activateTab(which) {
+      panes.forEach((id) => {
+        document.getElementById('content-' + id).classList.toggle('active', id === which);
       });
 
-      localStorage.setItem('theme', 'dark');
-    }
-
-    function disableDarkMode() {
-      body.classList.add('bg-gray-50', 'text-gray-800');
-      body.classList.remove('bg-neutral-900', 'text-gray-300');
-
-      const excludedElements = document.querySelectorAll('.project-card, .tab-button, .code-example');
-      excludedElements.forEach(element => {
-        element.style.color = '';
-        element.style.backgroundColor = '';
+      document.querySelectorAll('.project-card').forEach((card) => {
+        card.classList.toggle('selected', card.dataset.tab === which);
       });
 
-      localStorage.setItem('theme', 'light');
+      document.querySelectorAll('.tab-button').forEach((button) => {
+        const active = button.dataset.tab === which;
+        button.classList.toggle('bg-blue-600', active);
+        button.classList.toggle('text-white', active);
+        button.classList.toggle('inactive', !active);
+        button.classList.toggle('bg-gray-200', !active);
+        button.classList.toggle('text-gray-900', !active);
+      });
     }
 
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      enableDarkMode();
-    } else {
-      disableDarkMode();
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const isDark = body.classList.contains('bg-neutral-900');
-      if (isDark) {
-        disableDarkMode();
-      } else {
-        enableDarkMode();
-      }
+    document.querySelectorAll('.project-card, .tab-button').forEach((element) => {
+      element.addEventListener('click', () => {
+        const which = element.dataset.tab;
+        if (panes.includes(which)) {
+          activateTab(which);
+        }
+      });
     });
 
-    const headers = document.querySelectorAll('h3.text-xl.font-semibold.mb-1');
-    headers.forEach(header => {
-      header.style.color = 'black';
-    });
-
-    const tabButtons = document.querySelectorAll('#tab-satp, #tab-acled');
-tabButtons.forEach(button => {
-  button.style.color = 'black';
-});
-
-const subHeaders = document.querySelectorAll('h3.text-lg.font-semibold.mb-2');
-subHeaders.forEach(subHeader => {
-  subHeader.style.color = 'black';
-});
-
-const regexElements = document.querySelectorAll('span');
-regexElements.forEach(element => {
-  if (element.textContent.trim() === 'Regex') {
-    element.style.backgroundColor = 'green';
-  }
-});
-
-const textCleaningElements = document.querySelectorAll('span');
-textCleaningElements.forEach(element => {
-  if (element.textContent.trim() === 'Text Cleaning') {
-    element.style.backgroundColor = 'red';
-  }
-});
+    JadeSite.initThemeToggle();
+    JadeSite.decorateExternalLinks();
+    activateTab('satp');
   </script>
-    <style>
-    /* hide all panes by default */
-    #content-satp, #content-acled { display: none; }
-    /* show only the active one */
-    #content-satp.active, #content-acled.active { display: block; }
-    /* focus ring on the selected card */
-    .project-card.selected { ring: 2px; ring-color: #3b82f6; }
-  </style>
-
-  <script>
-    const panes = ['satp','acled'];
-        document.querySelectorAll('.project-card, .tab-button')
-          .forEach(el => el.addEventListener('click', () => {
-            const which = el.dataset.tab;
-            if (!panes.includes(which)) return;
-            panes.forEach(id => {
-              document.getElementById('content-'+id)
-                .classList.toggle('active', id===which);
-            });
-            document.querySelectorAll('.project-card')
-              .forEach(c => c.classList.toggle('selected', c.dataset.tab===which));
-            document.querySelectorAll('.tab-button')
-              .forEach(b => {
-                const on = b.dataset.tab===which;
-                b.classList.toggle('bg-blue-600', on);
-                b.classList.toggle('text-white', on);
-                b.classList.toggle('bg-gray-200', !on);
-                b.classList.toggle('hover:bg-gray-300', !on);
-              });
-          }));
-        document.querySelector('[data-tab="satp"]').click();
-      </script>
-
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    </body>
-    </html>
-  </script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 </body>

@@ -7,56 +7,25 @@
   <meta name="description" content="Embedded paper viewer for Jade Chen's Smart Cities Mission policy evaluation project.">
   <link rel="canonical" href="https://jadechen.site/projects/smart-cities.html">
   <meta name="robots" content="noindex,follow">
+  <meta name="theme-color" content="#f9fafb">
   <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-800 font-sans p-6">
-  <div class="max-w-5xl mx-auto">
-    <div class="flex justify-between items-center mb-4">
-      <a href="smart-cities.html" class="text-blue-600 hover:underline">← Back to Project</a>
-    </div>
-    <h1 class="text-2xl font-bold mb-4">Program Evaluation: Smart Cities Mission</h1>
-    <iframe src="../assets/papers/smart-cities-paper.pdf" width="100%" height="900px" class="border rounded shadow"></iframe>
-  </div>
   <script>
-    const themeToggle = document.createElement('button');
-    themeToggle.id = 'theme-toggle';
-    themeToggle.className = 'text-yellow-500 hover:text-yellow-300 text-xl';
-    themeToggle.setAttribute('aria-label', 'Toggle Dark Mode');
-    themeToggle.textContent = '💡';
+    tailwind.config = { darkMode: 'class' };
+  </script>
+  <script src="../assets/js/site.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans transition-colors duration-300 dark:bg-neutral-900 dark:text-gray-200">
+  <main class="mx-auto max-w-5xl p-6">
+    <div class="mb-4 flex items-center justify-between">
+      <a href="smart-cities.html" class="text-blue-600 hover:underline">Back to Project</a>
+      <button id="theme-toggle" class="text-yellow-500 hover:text-yellow-300 text-xl" aria-label="Toggle Dark Mode" aria-pressed="false">💡</button>
+    </div>
+    <h1 class="mb-4 text-2xl font-bold">Program Evaluation: Smart Cities Mission</h1>
+    <iframe src="../assets/papers/smart-cities-paper.pdf" width="100%" height="900" class="rounded border shadow" title="Smart Cities paper PDF"></iframe>
+  </main>
 
-    const body = document.body;
-
-    function enableDarkMode() {
-      body.classList.remove('bg-gray-50', 'text-gray-800');
-      body.classList.add('bg-neutral-900', 'text-gray-300');
-
-      localStorage.setItem('theme', 'dark');
-    }
-
-    function disableDarkMode() {
-      body.classList.add('bg-gray-50', 'text-gray-800');
-      body.classList.remove('bg-neutral-900', 'text-gray-300');
-
-      localStorage.setItem('theme', 'light');
-    }
-
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      enableDarkMode();
-    } else {
-      disableDarkMode();
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const isDark = body.classList.contains('bg-neutral-900');
-      if (isDark) {
-        disableDarkMode();
-      } else {
-        enableDarkMode();
-      }
-    });
-
-    document.querySelector('.flex').appendChild(themeToggle);
+  <script>
+    JadeSite.initThemeToggle();
   </script>
 </body>
 </html>
