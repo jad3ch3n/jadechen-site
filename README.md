@@ -85,21 +85,6 @@ Deployment notes:
 - `robots.txt` and `sitemap.xml` are included for search indexing support.
 - The web manifest lives at [`assets/icons/site.webmanifest`](assets/icons/site.webmanifest).
 
-## Theme & Privacy Notes
-
-The site uses a shared helper in `assets/js/site.js` to keep light/dark mode behavior consistent across pages.
-
-Privacy hardening currently includes:
-
-- client-side rendering for homepage contact links to reduce basic email scraping
-- `referrer` and `referrerpolicy` protections on public-facing pages and outbound links
-- explicit `robots.txt` directives that opt major AI-training crawlers out of the site
-- removal of third-party resume embedding in favor of the site-hosted PDF
-
-Important limitation:
-
-- A static site cannot fully prevent scraping or copying. These changes reduce casual harvesting and make intent clear, but they are not a guarantee against determined bots or mirrors.
-
 ## Repository Structure
 
 ```text
@@ -126,30 +111,3 @@ Important limitation:
 ## Custom Domain Note
 
 This repository is branded around [jadechen.site](https://jadechen.site), not the default GitHub Pages URL. The custom domain is already configured in-repo through `CNAME`, but DNS, GitHub Pages settings, and repository settings still need to remain aligned on GitHub.
-
-## Repository Rename Guidance
-
-If I rename this repository to better match the portfolio identity, the recommended choice is:
-
-- `jadechen-portfolio`
-
-Other workable options:
-
-- `jadechen-site`
-- `portfolio-site`
-
-Detailed rename guidance is documented in [`REPO_RENAME_NOTES.md`](REPO_RENAME_NOTES.md).
-
-## Future Improvements
-
-- Strengthen homepage storytelling with clearer project outcomes and impact metrics
-- Add a dedicated social preview image for richer link sharing
-- Introduce a stronger content hierarchy for featured projects
-- Add a lightweight build step for linting or HTML validation if the site grows
-- Expand SEO metadata coverage if additional pages are added
-
-## Maintenance Notes
-
-- If the repository is renamed on GitHub, verify the Pages source and custom domain settings afterward.
-- If DNS is changed, re-check that `jadechen.site` still resolves correctly and that HTTPS remains enabled.
-- Keep absolute public links pointed at `https://jadechen.site` rather than the GitHub Pages default domain.
