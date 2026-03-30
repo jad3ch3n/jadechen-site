@@ -11,19 +11,11 @@
     // Ensure Tailwind uses class strategy for dark mode
     tailwind.config = { darkMode: 'class' };
   </script>
-
-  <!-- Theme bootstrap: default LIGHT unless user explicitly chose dark -->
-  <script>
-    (function () {
-      const saved = localStorage.getItem('theme');   // "dark" | "light" | null
-      const isDark = saved === 'dark';
-      document.documentElement.classList.toggle('dark', isDark);
-      if (!saved) localStorage.setItem('theme','light'); // initialize once
-    })();
-  </script>
+  <script src="assets/js/site.js"></script>
   <meta name="description" content="Resume and experience overview for Jade Chen, data analyst and economics researcher.">
   <link rel="canonical" href="https://jadechen.site/resume.html">
   <meta name="theme-color" content="#f9fafb">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta property="og:type" content="profile">
   <meta property="og:site_name" content="Jade Chen">
   <meta property="og:title" content="Resume | Jade Chen">
@@ -59,29 +51,9 @@
     </footer>
   </div>
 
-  <!-- Toggle logic: flip html.dark + persist (same as index.html) -->
   <script>
-    (function () {
-      const btn = document.getElementById('theme-toggle');
-      if (!btn) return;
-
-      function applyTheme(mode) {
-        const isDark = mode === 'dark';
-        document.documentElement.classList.toggle('dark', isDark);
-        localStorage.setItem('theme', mode);
-        btn.setAttribute('aria-pressed', String(isDark));
-      }
-
-      // Initialize from storage (keeps aria-pressed in sync)
-      const saved = localStorage.getItem('theme'); // "dark" | "light"
-      applyTheme(saved === 'dark' ? 'dark' : 'light');
-
-      // Toggle on click
-      btn.addEventListener('click', () => {
-        const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
-        applyTheme(next);
-      });
-    })();
+    JadeSite.initThemeToggle();
+    JadeSite.decorateExternalLinks();
   </script>
 </body>
 </html>
