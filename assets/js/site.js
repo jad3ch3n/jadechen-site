@@ -95,7 +95,11 @@
 
       const href = definition.href.join('');
       link.setAttribute('href', href);
-      link.textContent = link.dataset.label || definition.text;
+      if (link.dataset.keepContent !== 'true') {
+        link.textContent = link.dataset.label || definition.text;
+      }
+      link.setAttribute('aria-label', link.dataset.label || definition.text);
+      link.setAttribute('title', link.dataset.label || definition.text);
       link.setAttribute('rel', 'noopener noreferrer me');
       link.setAttribute('referrerpolicy', 'no-referrer');
 
